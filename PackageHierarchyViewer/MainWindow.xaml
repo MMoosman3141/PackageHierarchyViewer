@@ -6,7 +6,24 @@
         xmlns:local="clr-namespace:PackageHierarchyViewer"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+  <Window.Resources>
+    <local:MainViewModel x:Key="vm" />
+  </Window.Resources>
+    <Grid DataContext="{StaticResource vm}">
+    <DockPanel>
+      <DockPanel DockPanel.Dock="Top">
+        <Label Content="Repository:" Width="95"/>
+        <TextBox Text="{Binding PackageSource}" />
+      </DockPanel>
+      <DockPanel DockPanel.Dock="Top">
+        <Label Content="Target Package:" Width="95"/>
+        <TextBox Text="{Binding TargetPackage}" />
+      </DockPanel>
+      <CheckBox Content="Allow Prerelease" IsChecked="{Binding AllowPrerelease}" DockPanel.Dock="Top" />
+      <Button Content="Get Packages" Command="{Binding GetPackagesCmd}" DockPanel.Dock="Bottom"/>
+      <GroupBox Header="Packages">
+        <ListBox ItemsSource="{Binding Packages}" />
+      </GroupBox>
+    </DockPanel>
+  </Grid>
 </Window>
